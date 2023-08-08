@@ -37,7 +37,9 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@fontsource/poppins": "^5.0.7",
 		"@types/svelte-leafletjs": "^0.8.3",
+		"mongodb": "^5.7.0",
 		"svelte-leaflet": "^0.2.0"
 	}
 }
