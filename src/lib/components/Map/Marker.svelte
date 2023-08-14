@@ -4,7 +4,10 @@
 
 	// export let width: number;
 	// export let height: number;
-	export let latLng: L.LatLngExpression;
+	// export let latLng: L.LatLng;
+	export let lat: number;
+	export let long: number;
+	console.log(typeof lat);
 
 	let marker: L.Marker | undefined;
 	let draggableMarker: L.Marker | undefined;
@@ -20,7 +23,7 @@
 
 	onMount(() => {
 		if (map) {
-			marker = L.marker(latLng).addTo(map);
+			marker = L.marker([lat, long]).addTo(map);
 		}
 	});
 
