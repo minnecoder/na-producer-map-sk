@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { onMount, onDestroy, getContext, setContext } from 'svelte';
 	import L from 'leaflet';
-	import { indexDraggableLocation } from '$lib/Stores';
+	import { registerDraggableLocation } from '$lib/Stores';
 
-	export let initialLocation: L.LatLngExpression;
+	export let initialLocation: L.LatLngTuple;
 
 	let marker: L.Marker | undefined;
 	let markerElement: HTMLElement;
@@ -31,7 +31,7 @@
 				draggable: 'true'
 			});
 
-			$indexDraggableLocation = [position.lat, position.lng];
+			$registerDraggableLocation = [position.lat, position.lng];
 		});
 	});
 
