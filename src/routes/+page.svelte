@@ -1,26 +1,43 @@
 <script lang="ts">
-	import type { LatLngExpression } from 'leaflet';
+	import type { LatLngTuple } from 'leaflet';
+	import { goto } from '$app/navigation';
 	import Leaflet from '$lib/components/Map/Leaflet.svelte';
 	import Marker from '$lib/components/Map/Marker.svelte';
 	import Popup from '$lib/components/Map/Popup.svelte';
+	import type { PageData } from './$types';
 
-	export let producers: any[];
-	console.log(producers);
+	export let data: PageData;
+	const producers = JSON.parse(data.data);
 
-	const initialView: LatLngExpression = [39.06, -94.57];
-	const markerLocations: Array<LatLngExpression> = [
-		[44.986656, -93.258133],
-		[45.986657, -92.258134],
-		[39.7392358, -104.990251]
-	];
+	const initialView: LatLngTuple = [39.06, -94.57];
+
+	// TODO: Get button route changing to work
 </script>
 
 <div class="container">
 	<div id="map">
 		<Leaflet view={initialView} zoom={5}>
-			{#each markerLocations as latLng}
-				<Marker {latLng}>
-					<Popup>Like & Subscribe!</Popup>
+			{#each producers as producer}
+				<Marker lat={producer.lat} long={producer.long}>
+					<Popup>
+						<div class="popup">
+							<h3>{producer.name}</h3>
+							<h4>{producer.email}</h4>
+							<p>{producer.linkText}</p>
+							<!-- <button
+								type="button"
+								on:click={() =>
+									goto(
+										{
+											url: `/user/${producer.linkText}`
+										},
+										`/user/${producer.linkText}`
+									)}
+							>
+								View Profile
+							</button> -->
+						</div>
+					</Popup>
 				</Marker>
 			{/each}
 		</Leaflet>
