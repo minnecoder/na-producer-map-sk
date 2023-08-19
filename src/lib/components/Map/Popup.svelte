@@ -28,8 +28,15 @@
 	});
 </script>
 
-<div bind:this={popupElement}>
+<div class="custom-popup" bind:this={popupElement}>
 	{#if open}
 		<slot />
 	{/if}
 </div>
+
+<style>
+	.custom-popup {
+		width: 200px;
+		padding: 10px;
+	}
+</style>
