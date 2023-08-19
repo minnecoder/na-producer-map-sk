@@ -2,15 +2,10 @@
 	import { onMount, onDestroy, getContext, setContext } from 'svelte';
 	import L from 'leaflet';
 
-	// export let width: number;
-	// export let height: number;
-	// export let latLng: L.LatLng;
 	export let lat: number;
 	export let long: number;
-	console.log(typeof lat);
 
 	let marker: L.Marker | undefined;
-	let draggableMarker: L.Marker | undefined;
 	let markerElement: HTMLElement;
 
 	const { getMap }: { getMap: () => L.Map | undefined } = getContext('map');
