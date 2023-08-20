@@ -1,11 +1,11 @@
 <script lang="ts">
-	import type { LatLngExpression } from 'leaflet';
+	import type { LatLngTuple } from 'leaflet';
+	import type { ActionData } from './$types';
+	import { enhance } from '$app/forms';
 	import TextInput from '$lib/components/TextInput/TextInput.svelte';
 	import Leaflet from '$lib/components/Map/Leaflet.svelte';
-
+	import { registerDraggableLocation } from '$lib/Stores';
 	import RegisterDraggableMarker from './RegisterDraggableMarker.svelte';
-
-	let errorMessage = '';
 
 	let user = {
 		name: '',
@@ -13,8 +13,8 @@
 		password: '',
 		confirmPassword: '',
 		linkText: '',
-		lat: 0,
-		long: 0,
+		lat: 0.0,
+		long: 0.0,
 		peerage: '',
 		phone: '',
 		facebook: '',
@@ -26,12 +26,15 @@
 		website: ''
 	};
 
-	const initialView: LatLngExpression = [51.514244, 7.468429]; // Dortmund, Germany
-	const initialLocation: LatLngExpression = [51.5, 7.8];
+	export let form: ActionData;
 
-	// TODO: Create "handleSubmit" function
+	$: user.lat = $registerDraggableLocation[0];
+	$: user.long = $registerDraggableLocation[1];
+
+	const initialView: LatLngTuple = [51.514244, 7.468429]; // Dortmund, Germany
+	const initialLocation: LatLngTuple = [51.5, 7.8];
+
 	// TODO: Create sanitize data function
-	// TODO: Create formErrors function
 </script>
 
 <svelte:head>
@@ -41,9 +44,14 @@
 <main>
 	<div class="container">
 		<div class="left">
-			<form class="form" action="/">
+			<form class="form" use:enhance action="?/register" method="POST">
 				<h1>Register</h1>
-				<p class="errorMessage">{errorMessage}</p>
+				{#if form?.message}
+					<div class="errorMessage">
+						{form?.message}
+					</div>
+				{/if}
+
 				<TextInput
 					label="Display Name"
 					name="name"
@@ -100,6 +108,20 @@
 					bind:value={user.nasocial}
 				/>
 				<TextInput label="Website" name="website" bind:value={user.website} />
+				<input
+					class="hidden"
+					type="number"
+					step="0.0000000000000001"
+					name="lat"
+					bind:value={user.lat}
+				/>
+				<input
+					class="hidden"
+					type="number"
+					step="0.0000000000000001"
+					name="long"
+					bind:value={user.long}
+				/>
 				<input type="submit" value="Register" />
 				<p>
 					Already have an account?{' '}
@@ -181,9 +203,15 @@
 		color: #007bff;
 		text-decoration: none;
 	}
-
+	.hidden {
+		position: absolute;
+		left: -9999px;
+		width: 1px;
+		height: 1px;
+		opacity: 0;
+		overflow: hidden;
+	}
 	.errorMessage {
-		padding-bottom: 1rem;
 		color: red;
 	}
 
