@@ -14,6 +14,7 @@
 
 	const dispatch = createEventDispatcher();
 
+	// TODO: Make map not have "infinite" scroll or make markers appear on every "copy" of the continents
 	let map: L.Map | undefined;
 	let mapElement: HTMLElement;
 
@@ -25,7 +26,6 @@
 		map = L.map(mapElement)
 			// example to expose map events to parent components:
 			.on('zoom', (e) => dispatch('zoom', e));
-
 		L.tileLayer(
 			'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
 			{
