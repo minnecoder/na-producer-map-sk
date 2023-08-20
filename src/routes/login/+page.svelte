@@ -1,28 +1,14 @@
 <script lang="ts">
 	import TextInput from '$lib/components/TextInput/TextInput.svelte';
 	let user = {
-		name: '',
 		email: '',
-		password: '',
-		linkText: '',
-		lat: 0,
-		long: 0,
-		peerage: '',
-		phone: '',
-		facebook: '',
-		twitter: '',
-		instagram: '',
-		linkedin: '',
-		youtube: '',
-		nasocial: '',
-		website: ''
+		password: ''
 	};
+	import { enhance } from '$app/forms';
+	import type { ActionData } from './$types';
+	export let form: ActionData;
 
-	let errorMessage = '';
-
-	// TODO: Create "handleSubmit" function
 	// TODO: Create sanitize data function
-	// TODO: Create formErrors function
 </script>
 
 <svelte:head>
@@ -30,10 +16,13 @@
 </svelte:head>
 <main>
 	<div class="container">
-		<form class="form">
+		<form class="form" use:enhance action="?/login" method="POST">
 			<h1>Login</h1>
-			<p class="errorMessage">{errorMessage}</p>
-
+			{#if form?.message}
+				<div class="errorMessage">
+					{form?.message}
+				</div>
+			{/if}
 			<TextInput label="Email" name="email" bind:value={user.email} required />
 			<TextInput
 				label="Password"
@@ -95,6 +84,7 @@
 	}
 
 	.errorMessage {
+		padding: 1rem 0;
 		color: red;
 	}
 </style>
