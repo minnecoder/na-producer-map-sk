@@ -1,6 +1,5 @@
 <script lang="ts">
 	import type { LatLngTuple } from 'leaflet';
-	import { goto } from '$app/navigation';
 	import Leaflet from '$lib/components/Map/Leaflet.svelte';
 	import Marker from '$lib/components/Map/Marker.svelte';
 	import Popup from '$lib/components/Map/Popup.svelte';
@@ -10,8 +9,6 @@
 	const producers = JSON.parse(data.data);
 
 	const initialView: LatLngTuple = [39.06, -94.57];
-
-	// TODO: Get button route changing to work
 </script>
 
 <div class="container">
@@ -24,18 +21,9 @@
 							<h3>{producer.name}</h3>
 							<h4>{producer.email}</h4>
 							<p>{producer.linkText}</p>
-							<!-- <button
-								type="button"
-								on:click={() =>
-									goto(
-										{
-											url: `/user/${producer.linkText}`
-										},
-										`/user/${producer.linkText}`
-									)}
-							>
+							<a href="/user/{producer.linkText}" data-sveltekit-preload-data>
 								View Profile
-							</button> -->
+							</a>
 						</div>
 					</Popup>
 				</Marker>
@@ -48,5 +36,13 @@
 	#map {
 		height: calc(100vh - 70px);
 		width: 100vw;
+	}
+
+	.popup a {
+		padding: 0.5rem;
+		background: rgb(219, 219, 219);
+		text-decoration: none;
+		color: #000;
+		border-radius: 5px;
 	}
 </style>
