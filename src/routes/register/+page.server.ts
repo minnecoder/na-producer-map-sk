@@ -1,8 +1,7 @@
 import type { Actions } from './$types';
 import bcrypt from 'bcryptjs';
 import db from '$lib/db';
-import { fail } from '@sveltejs/kit';
-import { redirect } from '@sveltejs/kit';
+import { fail, redirect } from '@sveltejs/kit';
 
 export const actions: Actions = {
 	register: async ({ request }) => {
@@ -79,10 +78,12 @@ export const actions: Actions = {
 			return fail(400, { message: 'Email already exists' });
 		}
 
+		// Create new user
 		const createUser = await db.collection('users').insertOne({
 			name: name,
 			email: email,
 			password: hashedPassword,
+			userAuthToken: crypto.randomUUID(),
 			role: 'user',
 			linkText,
 			lat: lat,
@@ -101,6 +102,7 @@ export const actions: Actions = {
 		if (!createUser) {
 			return fail(400, { message: 'User not created' });
 		}
+
 		throw redirect(302, '/');
 	}
 };
