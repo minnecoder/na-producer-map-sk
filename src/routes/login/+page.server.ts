@@ -5,33 +5,46 @@ import { fail } from '@sveltejs/kit';
 import { redirect } from '@sveltejs/kit';
 
 export const actions: Actions = {
-	login: async ({ request }) => {
+	login: async ({ cookies, request }) => {
 		let { email, password } = Object.fromEntries(
 			await request.formData()
 		) as unknown as {
 			email: string;
 			password: string;
 		};
-		console.log('hello');
 
 		// Check if producer exists
-
 		const producer = await db.collection('users').findOne({ email: email });
-		console.log(producer);
-		// TODO: Change message before finishing this project
 		if (!producer) {
-			return fail(400, { message: "User doesn't exist" });
+			return fail(400, {
+				message: 'There was a problem with the user name or password'
+			});
 		}
 
 		// Verify that the given password is correct
-		const isPasswordValid = await bcrypt.compare(password, producer.email);
-		console.log(isPasswordValid);
-
-		// TODO: Change message before finishing this
+		const isPasswordValid = await bcrypt.compare(password, producer.password);
 		if (!isPasswordValid) {
-			return fail(400, { message: 'Password is wrong' });
+			return fail(400, {
+				message: 'There was a problem with the user name or password'
+			});
 		}
-		console.log('User should be logged in now');
-		// throw redirect(302, '/');
+
+		const authenticatedUser = await db
+			.collection('users')
+			.findOneAndUpdate(
+				{ email: producer.email },
+				{ $set: { userAuthToken: crypto.randomUUID() } },
+				{ returnDocument: 'after' }
+			);
+
+		cookies.set('session', authenticatedUser.value?.userAuthToken, {
+			path: '/',
+			httpOnly: true,
+			sameSite: 'strict',
+			secure: process.env.NODE_ENV === 'production',
+			maxAge: 60 * 60 * 24 * 30
+		});
+
+		throw redirect(302, '/');
 	}
 };
