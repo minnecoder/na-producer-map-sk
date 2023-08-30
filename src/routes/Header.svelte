@@ -1,9 +1,6 @@
 <script lang="ts">
-	const hello = 'hi';
-	// import '@fontsource/poppins';
-
+	import { page } from '$app/stores';
 	// TODO: Add link to Profile page for My Profile button
-	// TODO: Add functionality to Sign Out button
 </script>
 
 <header>
@@ -29,17 +26,25 @@
 				</ul>
 			</div>
 
-			{#if hello}
+			{#if $page.data.user}
 				<div class="right">
 					<div class="user" role="button">
-						<button type="button" class="headerButton"> My Profile </button>
-						<button type="button" class="headerButton"> Sign Out </button>
+						<a href="/" class="headerLink"> My Profile </a>
+						<a
+							href="/logout"
+							class="headerLink"
+							data-sveltekit-preload-data="off"
+							data-sveltekit-reload
+						>
+							Sign Out
+						</a>
 					</div>
 				</div>
-			{:else}
+			{/if}
+			{#if !$page.data.user}
 				<div class="noUserRight">
-					<button type="button" class="headerButton"> Register </button>
-					<button type="button" class="headerButton"> Sign In </button>
+					<a href="/register" class="headerLink"> Register </a>
+					<a href="/login" class="headerLink"> Sign In </a>
 				</div>
 			{/if}
 		</div>
@@ -49,7 +54,6 @@
 <style>
 	.container {
 		font-family: 'Poppins';
-		/* position: sticky; */
 		height: 70px;
 		display: flex;
 		justify-content: space-between;
@@ -82,15 +86,11 @@
 		text-decoration: none;
 	}
 
-	.headerButton {
-		border: none;
-		border-radius: 5px;
+	.headerLink {
+		text-decoration: none;
 		padding: 0.5rem 1rem;
 		color: white;
-		background: none;
 		margin-right: 1rem;
-		font: unset;
-		cursor: pointer;
 	}
 
 	.user {
