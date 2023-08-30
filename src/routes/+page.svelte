@@ -11,6 +11,10 @@
 	const initialView: LatLngTuple = [39.06, -94.57];
 </script>
 
+<svelte:head>
+	<title>No Agenda Producer Map</title>
+</svelte:head>
+
 <div class="container">
 	<div id="map">
 		<Leaflet view={initialView} zoom={5}>
