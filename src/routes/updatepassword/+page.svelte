@@ -1,20 +1,25 @@
 <script lang="ts">
+	import { enhance } from '$app/forms';
+	import type { ActionData } from './$types';
 	import TextInput from '$lib/components/TextInput/TextInput.svelte';
 	let user = {
 		password: '',
 		newPassword: '',
 		confirmNewPassword: ''
 	};
+	export let form: ActionData;
 
-	let errorMessage = '';
-
-	// TODO: Create handlesubmit function
+	// TODO: Sanitize data
 </script>
 
 <div class="container">
-	<form class="form">
+	<form class="form" use:enhance action="?/updatePassword" method="POST">
 		<h1 class="title">Update Password</h1>
-		<p class="errorMessage">{errorMessage}</p>
+		{#if form?.message}
+			<div class="errorMessage">
+				{form?.message}
+			</div>
+		{/if}
 		<TextInput
 			label="Current Password"
 			name="password"
@@ -70,11 +75,8 @@
 		cursor: pointer;
 	}
 
-	.form p {
-		margin-top: 1rem;
-	}
-
 	.errorMessage {
+		padding: 1rem 0;
 		color: red;
 	}
 </style>
