@@ -30,7 +30,6 @@
 			marker.setLatLng(new L.LatLng(position.lat, position.lng), {
 				draggable: 'true'
 			});
-
 			$findProducersDraggableLocation = [position.lat, position.lng];
 		});
 	});
