@@ -7,8 +7,6 @@
 	import { enhance } from '$app/forms';
 	import type { ActionData } from './$types';
 	export let form: ActionData;
-
-	// TODO: Create sanitize data function
 </script>
 
 <svelte:head>
