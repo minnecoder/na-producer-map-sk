@@ -8,8 +8,6 @@
 		confirmNewPassword: ''
 	};
 	export let form: ActionData;
-
-	// TODO: Sanitize data
 </script>
 
 <div class="container">
