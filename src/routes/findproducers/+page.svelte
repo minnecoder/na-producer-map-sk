@@ -107,7 +107,7 @@
 							<Popup>
 								<h3>{producer.name}</h3>
 								<p>{producer.email}</p>
-								<a class="userLink" href="/user/${producer.linkText}"
+								<a class="userLink" href="/user/{producer.linkText}"
 									>View Profile</a
 								>
 							</Popup>
