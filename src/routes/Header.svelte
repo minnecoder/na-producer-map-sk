@@ -14,14 +14,14 @@
 					<li>
 						<a href="/">Map</a>
 					</li>
-					<li>
-						<a href="/findproducers">Find Producers</a>
-					</li>
+					{#if $page.data.user}
+						<li>
+							<a href="/findproducers">Find Producers</a>
+						</li>
+					{/if}
+
 					<li>
 						<a href="/about">About</a>
-					</li>
-					<li>
-						<a href="/register">Register</a>
 					</li>
 				</ul>
 			</div>
