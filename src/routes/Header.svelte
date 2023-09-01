@@ -71,6 +71,7 @@
 
 	.middle ul {
 		display: flex;
+		flex-wrap: wrap;
 		flex-direction: row;
 	}
 
@@ -92,7 +93,23 @@
 		margin-right: 1rem;
 	}
 
+	.right,
+	.noUserRight {
+		display: flex;
+		flex-wrap: wrap;
+	}
 	.user {
 		margin-right: 1rem;
+	}
+
+	@media screen and (max-width: 700px) {
+		.container a {
+			margin: 0;
+			padding: 0;
+			font-size: 0.75rem;
+		}
+		h3 {
+			font-size: 0.75rem;
+		}
 	}
 </style>
