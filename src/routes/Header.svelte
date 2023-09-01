@@ -29,7 +29,7 @@
 			{#if $page.data.user}
 				<div class="right">
 					<div class="user" role="button">
-						<a href="/" class="headerLink"> My Profile </a>
+						<a href="/update" class="headerLink"> My Profile </a>
 						<a
 							href="/logout"
 							class="headerLink"
