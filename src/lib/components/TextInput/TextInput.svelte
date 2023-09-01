@@ -40,6 +40,8 @@
 	.container label > input {
 		display: flex;
 		flex-direction: column;
+		padding-left: 0.5rem;
+		font-size: 1rem;
 	}
 
 	.input {
