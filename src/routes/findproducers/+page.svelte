@@ -156,9 +156,10 @@
 	.selectedList {
 		border: solid 1px rgb(80, 80, 80);
 		border-radius: 5px;
-		width: 33%;
+		width: 60%;
 		margin: 0.5rem 0;
 		padding: 0.5rem 0.5rem;
+		word-wrap: break-word;
 	}
 
 	.right {
@@ -187,5 +188,26 @@
 		margin-top: 1rem;
 		height: 60vh;
 		width: 50vw;
+	}
+
+	@media screen and (max-width: 860px) {
+		.button {
+			margin-top: 1rem;
+		}
+	}
+
+	@media screen and (max-width: 700px) {
+		.main {
+			flex-direction: column-reverse;
+		}
+		.left {
+			width: 80%;
+		}
+		.right {
+			width: 80%;
+		}
+		#map {
+			width: 100%;
+		}
 	}
 </style>
