@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	// TODO: Add link to Profile page for My Profile button
 </script>
 
 <header>
