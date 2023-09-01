@@ -33,8 +33,6 @@
 
 	const initialView: LatLngTuple = [51.514244, 7.468429]; // Dortmund, Germany
 	const initialLocation: LatLngTuple = [51.5, 7.8];
-
-	// TODO: Create sanitize data function
 </script>
 
 <svelte:head>
@@ -218,5 +216,24 @@
 	.map {
 		width: 50vw;
 		height: 60vh;
+	}
+
+	@media screen and (max-width: 700px) {
+		.container {
+			flex-direction: column;
+		}
+		.left {
+			height: 100%;
+			width: 80%;
+			margin-top: 0rem;
+		}
+		.right {
+			width: 80%;
+			margin: 1rem 0 0 4rem;
+			padding-right: 0;
+		}
+		.map {
+			width: 100%;
+		}
 	}
 </style>
