@@ -92,4 +92,11 @@
 	h1 {
 		margin: 2rem 0;
 	}
+
+	@media only screen and (max-width: 710px) {
+		.container {
+			display: flex;
+			flex-direction: column;
+		}
+	}
 </style>

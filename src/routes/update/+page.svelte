@@ -143,4 +143,24 @@
 		width: 50vw;
 		height: 60vh;
 	}
+
+	@media screen and (max-width: 930px) {
+		main {
+			display: flex;
+			flex-direction: column;
+		}
+		.left {
+			margin-top: 0rem;
+			width: 85%;
+			height: 100%;
+		}
+		.right {
+			margin: 1rem 0 0 4rem;
+			padding-right: 0;
+		}
+
+		.map {
+			width: 90%;
+		}
+	}
 </style>
