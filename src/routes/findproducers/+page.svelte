@@ -16,6 +16,7 @@
 	const initialView: LatLngTuple = [39.06, -94.57];
 	const initialLocation: LatLngTuple = [41.5, -93.45];
 
+	let isButtonClicked = false;
 	let selectedProducers: User[] = [];
 	let meetupLocation: LatLngTuple = [user.lat, user.long];
 	$: meetupLocation = $findProducersDraggableLocation;
@@ -46,6 +47,7 @@
 
 			return distance <= targetRange;
 		});
+		isButtonClicked = true;
 		selectedProducers = filteredItems;
 	}
 </script>
@@ -86,6 +88,9 @@
 			</div>
 			<div class="selectedProducers">
 				<h3>Producers within the area</h3>
+				{#if selectedProducers.length === 0 && isButtonClicked}
+					<p class="noProducers">No Producers found within this range</p>
+				{/if}
 				{#each selectedProducers as selectedProducer}
 					<div class="selectedList">
 						<h3>{selectedProducer.name}</h3>
@@ -182,6 +187,10 @@
 		background: rgb(212, 212, 212);
 		border: solid 1px rgb(212, 212, 212);
 		border-radius: 5px;
+	}
+	.noProducers {
+		color: red;
+		padding-top: 1rem;
 	}
 
 	#map {
