@@ -31,8 +31,8 @@
 	$: user.lat = $registerDraggableLocation[0];
 	$: user.long = $registerDraggableLocation[1];
 
-	const initialView: LatLngTuple = [51.514244, 7.468429]; // Dortmund, Germany
-	const initialLocation: LatLngTuple = [51.5, 7.8];
+	const initialView: LatLngTuple = [39.06, -94.57];
+	const initialLocation: LatLngTuple = [41.5, -93.45];
 </script>
 
 <svelte:head>
